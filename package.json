@@ -1,0 +1,10 @@
+{
+  "name": "allinone-root",
+  "private": true,
+  "workspaces": ["frontend", "backend", "ai"],
+  "scripts": {
+    "start:frontend": "cd frontend && npm run dev",
+    "start:backend": "cd backend && npm run dev",
+    "start:ai": "cd ai && echo 'AI/ML services started (manual for now)'"
+  }
+} 
