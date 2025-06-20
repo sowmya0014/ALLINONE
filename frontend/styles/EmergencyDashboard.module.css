@@ -1,0 +1,243 @@
+/* Emergency Dashboard - Mobile-first styles */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #0001;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.header {
+  padding: 20px 16px 8px 16px;
+  background: #d32f2f;
+  color: #fff;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.mainContent {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.inputSection, .analysisSection, .mediaSection, .recentEmergencies {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 4px #0001;
+}
+.emergencyInput {
+  width: 100%;
+  font-size: 1.1em;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+  resize: vertical;
+}
+.actionButtons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.analyzeButton, .recordButton, .submitButton, .uploadButton, .backButton {
+  flex: 1 1 120px;
+  font-size: 1.1em;
+  padding: 14px 0;
+  border-radius: 8px;
+  border: none;
+  margin: 4px 0;
+  background: #1976d2;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 1px 4px #0002;
+  transition: background 0.2s;
+}
+.analyzeButton:active, .recordButton:active, .submitButton:active, .uploadButton:active, .backButton:active {
+  background: #125ea2;
+}
+.recordButton {
+  background: #fbc02d;
+  color: #222;
+}
+.recording {
+  background: #ff5252 !important;
+  color: #fff !important;
+}
+.analysisCard {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px #0001;
+  padding: 16px;
+  margin-top: 8px;
+}
+.analysisHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.categoryIcon {
+  font-size: 2.2em;
+}
+.priority {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 1em;
+  margin-left: 8px;
+  font-weight: 600;
+}
+.analysisDetails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.detailItem {
+  flex: 1 1 120px;
+  font-size: 1em;
+}
+.actionItems {
+  margin-top: 10px;
+}
+.actionItems ul {
+  padding-left: 18px;
+  margin: 0;
+}
+.fileInput {
+  width: 100%;
+  margin-bottom: 8px;
+}
+.fileInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1em;
+}
+.uploadButton {
+  background: #388e3c;
+}
+.recentEmergencies {
+  margin-top: 8px;
+}
+.emergencyList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.emergencyItem {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px #0001;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.emergencyHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1em;
+}
+.emergencyTime {
+  color: #888;
+  font-size: 0.95em;
+}
+.emergencyPriority {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.95em;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.footer {
+  padding: 16px;
+  text-align: center;
+}
+.backButton {
+  background: #eee;
+  color: #222;
+  border: 1px solid #ccc;
+  font-size: 1.1em;
+  padding: 12px 32px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+/* Floating Emergency Button */
+.fab-emergency {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  background: #d32f2f;
+  color: #fff;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  font-size: 32px;
+  box-shadow: 0 2px 8px #0003;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .container {
+    max-width: 100vw;
+    border-radius: 0;
+    min-height: 100vh;
+  }
+  .header {
+    border-radius: 0;
+    padding: 16px 8px 8px 8px;
+  }
+  .mainContent {
+    padding: 8px;
+    gap: 16px;
+  }
+  .inputSection, .analysisSection, .mediaSection, .recentEmergencies {
+    padding: 10px;
+    margin-bottom: 6px;
+  }
+  .analysisCard {
+    padding: 10px;
+  }
+  .footer {
+    padding: 8px;
+  }
+  .fab-emergency {
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* Loading Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.analyzeButton:disabled::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+  margin-left: 8px;
+} 

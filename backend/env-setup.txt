@@ -1,0 +1,54 @@
+# Environment Variables Setup Guide
+
+## 1. Create .env file in ALLINONE/backend directory
+
+Create a file named `.env` in your backend directory with the following content:
+
+```
+# OpenAI Configuration
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Twilio Configuration (for SMS/Calls)
+TWILIO_ACCOUNT_SID=your_twilio_account_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+TWILIO_PHONE_NUMBER=your_twilio_phone_number
+
+# Emergency Contact
+EMERGENCY_CONTACT_NUMBER=your_emergency_contact_number
+
+# Server Configuration
+PORT=5000
+NODE_ENV=development
+```
+
+## 2. Get OpenAI API Key
+
+1. Go to https://platform.openai.com/
+2. Sign up or login
+3. Go to "API Keys" section
+4. Click "Create new secret key"
+5. Copy the key (starts with sk-)
+6. Replace "your_openai_api_key_here" with your actual key
+
+## 3. How OpenAI Works in Your System
+
+When OpenAI is configured, your system will:
+- Analyze emergency descriptions using AI
+- Categorize emergencies (medical, fire, security, etc.)
+- Assess severity levels
+- Provide intelligent recommendations
+- Generate better responses
+
+## 4. Test AI Features
+
+After setting up the API key:
+1. Restart your backend: npm run dev
+2. Test with: npm run test:simple
+3. You should see "Emergency Engine: ACTIVE" instead of "FALLBACK_MODE"
+
+## 5. Cost Information
+
+OpenAI API costs:
+- GPT-3.5-turbo: ~$0.002 per 1K tokens
+- Typical emergency analysis: ~$0.01-0.05 per request
+- Very affordable for testing and small-scale use 

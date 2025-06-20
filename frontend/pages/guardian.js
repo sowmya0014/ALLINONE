@@ -25,11 +25,13 @@ export default function GuardianDashboard() {
   const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
-    // Fetch all emergencies on load
-    fetch('http://localhost:4000/api/emergencies')
+    // Fetch initial emergencies
+    fetch('/api/emergencies')
       .then(res => res.json())
       .then(data => setAlerts(data));
-    socket = io('http://localhost:4000');
+
+    // Connect to socket
+    socket = io('http://localhost:5000');
     socket.on('emergency', (event) => {
       setAlerts((prev) => {
         // Replace if already exists, else add to front
@@ -156,17 +158,32 @@ export default function GuardianDashboard() {
           {filteredAlerts.length === 0 && <div>No alerts yet.</div>}
           <ul style={{ padding: 0, listStyle: 'none' }}>
             {filteredAlerts.map((alert, idx) => (
-              <li key={idx} style={{ margin: '20px 0', padding: 20, background: '#fff', borderRadius: 8, boxShadow: '0 2px 8px #0001', cursor: 'pointer' }} onClick={() => setSelectedAlert({ ...alert, idx })}>
-                <b>Role:</b> {alert.role}<br />
-                <b>Location:</b> {alert.location ? `${alert.location.lat}, ${alert.location.lng}` : 'N/A'}<br />
-                <b>Time:</b> {new Date(alert.timestamp).toLocaleString()}<br />
-                <b>Contact:</b> +91-9876543210<br />
-                <b>User Name:</b> Demo User
-                {alert.mediaUrl && (
-                  <div style={{ marginTop: 8 }}>
-                    <a href={alert.mediaUrl} target="_blank" rel="noopener noreferrer">View Emergency Recording</a>
-                  </div>
-                )}
+              <li key={idx} style={{ margin: '20px 0', padding: 20, background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #0001', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: 10 }} onClick={() => setSelectedAlert({ ...alert, idx })}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: 22 }}>{alert.role ? alert.role.charAt(0).toUpperCase() + alert.role.slice(1) : 'User'}</span>
+                  <span style={{ color: '#1976d2', fontWeight: 600 }}>{alert.status || 'ACTIVE'}</span>
+                  <span style={{ marginLeft: 'auto', color: '#888', fontSize: 13 }}>{new Date(alert.timestamp).toLocaleTimeString()}</span>
+                </div>
+                <div style={{ fontSize: 15, color: '#333', margin: '6px 0' }}>{alert.description}</div>
+                <div style={{ fontSize: 14, color: '#555' }}>
+                  <b>Location:</b> {alert.location ? `${alert.location.lat.toFixed(4)}, ${alert.location.lng.toFixed(4)}` : 'N/A'}
+                  {alert.location && (
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${alert.location.lat},${alert.location.lng}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ marginLeft: 10, color: '#1976d2', textDecoration: 'underline', fontWeight: 500 }}
+                    >
+                      Get Directions
+                    </a>
+                  )}
+                </div>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 8 }}>
+                  <button style={{ fontSize: 16, padding: '8px 18px', background: '#388e3c', color: '#fff', border: 'none', borderRadius: 8 }} onClick={e => { e.stopPropagation(); window.open('tel:+919876543210'); }}>Call</button>
+                  {alert.mediaUrl && (
+                    <button style={{ fontSize: 16, padding: '8px 18px', background: '#1976d2', color: '#fff', border: 'none', borderRadius: 8 }} onClick={e => { e.stopPropagation(); window.open(alert.mediaUrl, '_blank'); }}>View Media</button>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
